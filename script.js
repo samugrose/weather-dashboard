@@ -12,19 +12,19 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
     }).then(function(response) {
 
       // Create CODE HERE to Log the queryURL
-      console.log(queryURL);
+    //   console.log(queryURL);
       // Create CODE HERE to log the resulting object
-      console.log((response.main.temp - 273.15));
-      var temp = (parseFloat(response.main.temp) - 273.15) * (9/5) + 32;
-      console.log(temp);
+    //   console.log((response.main.temp - 273.15));
+    //   var temp = (parseFloat(response.main.temp) - 273.15) * (9/5) + 32;
+    //   console.log(temp);
       // Create CODE HERE to calculate the temperature (converted from Kelvin)
       //var displayTemp = (temp − 273.15) * (9/5) + 32;
       //console.log(displayTemp);
       // Create CODE HERE to transfer content to HTML
-      var bod = $("body");
-      var newDiv = $("<div>");
-      newDiv.text("Temp in Bujumbura: " + temp.toFixed(1));
-      bod.append(newDiv);
+    //   var bod = $("body");
+    //   var newDiv = $("<div>");
+    //   newDiv.text("Temp in Bujumbura: " + temp.toFixed(1));
+    //   bod.append(newDiv);
       // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
       // Create CODE HERE to dump the temperature content into HTML
 
@@ -40,4 +40,24 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
     var headH1 = $("<h1>");
     headH1.text("Weather Dashboard");
     head.append(headH1); 
-    bodGetter.append(head);
+    
+
+    //looks like an md-9 and md-3
+    var container = $("<section>");
+    container.addClass("container");
+    bodGetter.prepend(container); // adds header to top, 
+    bodGetter.prepend(head);
+
+    var bigRow = $("<section>");
+    bigRow.addClass("row");
+    container.append(bigRow);
+
+    var md3 = $("<section>");
+    md3.addClass("col-md-3");
+    bigRow.append(md3);
+
+    var md9 = $("<section>");
+    md9.addClass("col-md-9");
+    bigRow.append(md9);
+
+
