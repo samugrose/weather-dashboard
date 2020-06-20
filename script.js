@@ -65,13 +65,13 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
     var md9Col = $("<section>");
     md9Col.addClass("col-md-12");
     md9TopRow.append(md9Col);
-    bigRow.append(md9TopRow);
+    md9.append(md9TopRow);
 
     var md9BtmRow = $("<section>");
     md9BtmRow.addClass("row");
     var md9BtmCol = $("<section>");
     md9BtmCol.addClass("col-md-12");
     md9BtmRow.append(md9BtmCol);
-    bigRow.append(md9BtmRow);
+    md9.append(md9BtmRow);
 
 
