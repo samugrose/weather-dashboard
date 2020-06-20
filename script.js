@@ -1,5 +1,5 @@
-
-var cityState;
+var bodGetter = $("body");
+var cityState = "seattle";
 var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
 
     // Here we are building the URL we need to query the database
@@ -29,3 +29,15 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
       // Create CODE HERE to dump the temperature content into HTML
 
     });
+
+    // <div class = "page-header d-flex align-items-center justify-content-center">
+    //     <h1>
+    //        Weather Dashboard 
+    //     </h1>
+    //  </div>
+    var head = $("<div>");
+    head.attr("class","page-header d-flex align-items-center justify-content-center");
+    var headH1 = $("<h1>");
+    headH1.text("Weather Dashboard");
+    head.append(headH1); 
+    bodGetter.append(head);
