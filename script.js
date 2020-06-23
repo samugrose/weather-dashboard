@@ -1,9 +1,11 @@
 var bodGetter = $("body");
-var cityState = "seattle";
+var cityStates = ["seattle"];
 var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
 
     // Here we are building the URL we need to query the database
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&appid=" + APIKey;
+    function getCityInfo() {
+        for (i = 0; i < cityStates.length; i++) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityStates + "&appid=" + APIKey;
 
     // We then created an AJAX call
     $.ajax({
@@ -29,6 +31,8 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
       // Create CODE HERE to dump the temperature content into HTML
 
     });
+}
+}
 
     // <div class = "page-header d-flex align-items-center justify-content-center">
     //     <h1>
@@ -55,6 +59,9 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
     var md3 = $("<section>");
     md3.addClass("col-md-3");
     bigRow.append(md3);
+    md3.prepend($("#submitSec"));
+
+    
 
     var md9 = $("<section>");
     md9.addClass("col-md-9");
@@ -73,5 +80,19 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
     md9BtmCol.addClass("col-md-12");
     md9BtmRow.append(md9BtmCol);
     md9.append(md9BtmRow);
+
+    
+    jQuery(`[type = "Submit"]`).on("click", function() {
+        event.preventDefault();
+        
+        var currentCity =  $("#inlineFormInputName").val();
+        cityStates.push(currentCity);
+        console.log(cityStates);
+        getCityInfo();
+    //$("input:text").val("Glenn Quagmire");
+    })
+    
+
+    //generate a form, add labels and input and
 
 
