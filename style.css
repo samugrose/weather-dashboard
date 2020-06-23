@@ -6,3 +6,12 @@
     color: whitesmoke;
     padding: 40px;
 }
+
+.blue {
+    background-color: lightblue;
+}
+
+.container {
+    padding-top: 100px;
+    max-width: 80%
+}
