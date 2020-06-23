@@ -9,9 +9,15 @@
 
 .blue {
     background-color: lightblue;
+    max-width: 50px;
+    max-height: 100px;
 }
 
 .container {
     padding-top: 100px;
     max-width: 80%
+}
+
+.col-md-12 {
+    padding: 0px;
 }

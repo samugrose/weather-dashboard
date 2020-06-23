@@ -13,23 +13,6 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
       method: "GET"
     }).then(function(response) {
 
-      // Create CODE HERE to Log the queryURL
-    //   console.log(queryURL);
-      // Create CODE HERE to log the resulting object
-    //   console.log((response.main.temp - 273.15));
-    //   var temp = (parseFloat(response.main.temp) - 273.15) * (9/5) + 32;
-    //   console.log(temp);
-      // Create CODE HERE to calculate the temperature (converted from Kelvin)
-      //var displayTemp = (temp − 273.15) * (9/5) + 32;
-      //console.log(displayTemp);
-      // Create CODE HERE to transfer content to HTML
-    //   var bod = $("body");
-    //   var newDiv = $("<div>");
-    //   newDiv.text("Temp in Bujumbura: " + temp.toFixed(1));
-    //   bod.append(newDiv);
-      // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-      // Create CODE HERE to dump the temperature content into HTML
-
     });
 }
 }
