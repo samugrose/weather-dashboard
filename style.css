@@ -9,8 +9,8 @@
 
 .blue {
     background-color: lightblue;
-    max-width: 50px;
-    max-height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 .container {
