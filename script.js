@@ -42,6 +42,7 @@ function getUV (lat, lon) {
 
 getCityInfo(); //when they click a new city these will be recalled
 getForecast();
+generateLocals();
 
 function getForecast() {
     // var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentCity +"&cnt=5&appid=" + APIKey;
@@ -89,8 +90,9 @@ function getForecast() {
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
         currentCity =  $("#inlineFormInputName").val();
-        if (currentCity !== "") {
-            currentCity = currentCity.charAt(0).toUpperCase() + currentCity.substr(1, currentCity.length);
+        currentCity = currentCity.charAt(0).toUpperCase() + currentCity.substr(1, currentCity.length);
+        if (currentCity !== "" && !cityStates.includes(currentCity)) {
+            
             //console.log(currentCity);
             var newDiv = $("<section>");
             newDiv.addClass("choiceCard choiceCard" + currentCity); //gives us choiceCardSacramento if currentCity is Sacramento
