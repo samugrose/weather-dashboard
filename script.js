@@ -41,13 +41,22 @@ getForecast();
 
 function getForecast() {
     // var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentCity +"&cnt=5&appid=" + APIKey;
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&cnt=5&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&cnt=38&appid=" + APIKey;
 
     $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(response) {
         console.log(response);
+        var dataInd = 0;
+        for (i = 0; i < 38; i++) {
+            if (response.list[i].dt_txt.indexOf("03:00:00") !== -1) {
+            var currentDay = "(" + moment(response.list[i].dt_txt.substr(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY")+ ")";
+            $(".card-title" + dataInd).text(currentDay);
+            console.log($(".card-title" + dataInd).text());
+            dataInd++; //shouldn't get above 4 since it starts at 0
+        }
+        }
         //$(".card-title").text(currentCity);
         //$(".mainTemp").text = ((response.main.temp - 273.15) * 1.80 + 32).toFixed(1); main.temp
       })
