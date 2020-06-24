@@ -62,6 +62,7 @@ function getForecast() {
             $(".card-title" + dataInd).text(currentDay);
             console.log($(".card-title" + dataInd).text());
             $(".forecast" + dataInd).attr("src", currentIcon);
+            $(".forecastTemp" + dataInd).text("Temperature: " + ((response.list[i].main.temp  - 273.15) * 1.80 + 32).toFixed(1)+ "\xB0F")
             dataInd++; //shouldn't get above 4 since it starts at 0
         }
         }
