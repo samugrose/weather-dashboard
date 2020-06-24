@@ -25,8 +25,6 @@ var currentCity = cityStates[0];
     });
 }
 
-var nowMoment = moment();
-console.log(nowMoment);
 
 function getUV (lat, lon) {
     var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
