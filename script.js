@@ -1,7 +1,6 @@
-var bodGetter = $("body");
 var cityStates = ["Seattle"];
 var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
-var currentCity = cityStates[0];
+var currentCity = "Seattle";
 var icon = "http://openweathermap.org/img/wn/04d@2x.png";
 
     function getCityInfo() {
@@ -78,14 +77,14 @@ function getForecast() {
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
         
-        var currentCity =  $("#inlineFormInputName").val();
+        currentCity =  $("#inlineFormInputName").val();
+        localStorage.setItem("city", JSON.stringify(currentCity));
+        console.log("local storage: " + JSON.parse(localStorage.getItem("city")))
         cityStates.push(currentCity);
-        console.log(cityStates);
+        console.log(currentCity);
         getCityInfo();
-    //$("input:text").val("Glenn Quagmire");
+        getForecast();
     })
-    
 
-    //generate a form, add labels and input and
 
 
