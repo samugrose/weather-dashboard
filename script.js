@@ -54,10 +54,14 @@ function getForecast() {
         console.log(response);
         var dataInd = 0;
         for (i = 0; i < 38; i++) {
+            
             if (response.list[i].dt_txt.indexOf("03:00:00") !== -1) {
+                var currentIcon = "http://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png";
+                console.log(currentIcon);
             var currentDay = "(" + moment(response.list[i].dt_txt.substr(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY")+ ")";
             $(".card-title" + dataInd).text(currentDay);
             console.log($(".card-title" + dataInd).text());
+            $(".forecast" + dataInd).attr("src", currentIcon);
             dataInd++; //shouldn't get above 4 since it starts at 0
         }
         }
