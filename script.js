@@ -11,6 +11,7 @@ var currentCity = cityStates[0];
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+        //console.log(moment.parseZone(date).format('MMM Do YYYY'));
     console.log(response);
     $(".card-title").text(currentCity);
     $(".mainTemp").text(((response.main.temp - 273.15) * 1.80 + 32).toFixed(1));
@@ -23,6 +24,9 @@ var currentCity = cityStates[0];
     getUV(lat, lon);
     });
 }
+
+var nowMoment = moment();
+console.log(nowMoment);
 
 function getUV (lat, lon) {
     var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
