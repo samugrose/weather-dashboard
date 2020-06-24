@@ -11,16 +11,18 @@ var icon = "http://openweathermap.org/img/wn/04d@2x.png";
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+        var localStorageVals = JSON.parse(localStorage.getItem("city"))
+        console.log(localStorageVals)
         generateLocals();
         //console.log(moment.parseZone(date).format('MMM Do YYYY'));
         icon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
         console.log(icon + " icon");
-    console.log(response);
+    //console.log(response);
     $(".cityDate").text( currentCity + " (" + moment(moment().format().substr(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY")+ ")");
     $(".weatherIconMain").attr("href", icon);
     $(".mainTemp").text(((response.main.temp - 273.15) * 1.80 + 32).toFixed(1));
     
-    console.log(response.main.humidity);
+    //console.log(response.main.humidity);
     $(".mainHum").text(response.main.humidity);
     $(".mainWind").text(response.wind.speed);
     var lat = response.coord.lat;
@@ -40,9 +42,9 @@ function getUV (lat, lon) {
   })
 }
 
-getCityInfo(); //when they click a new city these will be recalled
+getCityInfo();
 getForecast();
-generateLocals();
+
 
 function getForecast() {
     // var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentCity +"&cnt=5&appid=" + APIKey;
@@ -52,7 +54,7 @@ function getForecast() {
         url: queryURL,
         method: "GET"
       }).then(function(response) {
-        console.log(response);
+        //console.log(response);
         var dataInd = 0;
         for (i = 0; i < 38; i++) {
             
@@ -68,6 +70,7 @@ function getForecast() {
             dataInd++; //shouldn't get above 4 since it starts at 0
         }
         }
+        generateLocals();
         //$(".card-title").text(currentCity);
         //$(".mainTemp").text = ((response.main.temp - 273.15) * 1.80 + 32).toFixed(1); main.temp
       })
@@ -86,6 +89,16 @@ function getForecast() {
     $(".box").append(newDiv);
     }
   }
+
+  $(".box").on("click", ".choiceCard", function(event) {
+        event.preventDefault();
+      //console.log("clicked choice " + $(".choiceCard").text());
+      var dataVal = $(this).html();
+      currentCity = dataVal;
+      getCityInfo();
+      getForecast();
+      generateLocals();
+  })
     
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
@@ -99,9 +112,10 @@ function getForecast() {
             newDiv.html(currentCity);
             $(".box").append(newDiv);
             cityStates.push(currentCity); //updates cityStates in localStorage for generation of past cards
+            console.log(cityStates);
             localStorage.setItem("city", JSON.stringify(cityStates));
             var cities = JSON.parse(localStorage.getItem("city"));
-            console.log( "city at index 0: " + cities[0])
+            //console.log( "city at index 0: " + cities[0])
             
             //console.log(currentCity);
             $("#inlineFormInputName").val("");
