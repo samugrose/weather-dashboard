@@ -76,11 +76,11 @@ function getForecast() {
     
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
-        var newDiv = $("<section>");
-        newDiv.addClass("card" + currentCity);
-        newDiv.text(currentCity);
-
         currentCity =  $("#inlineFormInputName").val();
+        var newDiv = $("<section>");
+        newDiv.addClass("choiceCard");
+        newDiv.html(currentCity);
+        $(".choiceCol").append(newDiv);
         localStorage.setItem("city", JSON.stringify(currentCity));
         console.log("local storage: " + JSON.parse(localStorage.getItem("city")))
         cityStates.push(currentCity);
