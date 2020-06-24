@@ -13,7 +13,7 @@ var currentCity = cityStates[0];
     }).then(function(response) {
         //console.log(moment.parseZone(date).format('MMM Do YYYY'));
     console.log(response);
-    $(".card-title").text(currentCity);
+    $(".cityDate").text( currentCity + " (" + moment(moment().format().substr(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY")+ ")");
     $(".mainTemp").text(((response.main.temp - 273.15) * 1.80 + 32).toFixed(1));
     
     console.log(response.main.humidity);
