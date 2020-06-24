@@ -2,6 +2,7 @@ var bodGetter = $("body");
 var cityStates = ["Seattle"];
 var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
 var currentCity = cityStates[0];
+var icon = "http://openweathermap.org/img/wn/04d@2x.png";
 
     function getCityInfo() {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&cnt=5&appid=" + APIKey;
@@ -12,8 +13,11 @@ var currentCity = cityStates[0];
       method: "GET"
     }).then(function(response) {
         //console.log(moment.parseZone(date).format('MMM Do YYYY'));
+        icon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
+        console.log(icon + " icon");
     console.log(response);
     $(".cityDate").text( currentCity + " (" + moment(moment().format().substr(0, 10), "YYYY-MM-DD").format("MM/DD/YYYY")+ ")");
+    $(".weatherIconMain").attr("href", icon);
     $(".mainTemp").text(((response.main.temp - 273.15) * 1.80 + 32).toFixed(1));
     
     console.log(response.main.humidity);
