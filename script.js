@@ -3,6 +3,7 @@ var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
 var currentCity = "Seattle";
 var icon = "http://openweathermap.org/img/wn/04d@2x.png";
 
+    //main function pulling information for the current city selected, pulling from local storage and populating info for temperature
     function getCityInfo() {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&cnt=5&appid=" + APIKey;
 
@@ -13,7 +14,7 @@ var icon = "http://openweathermap.org/img/wn/04d@2x.png";
     }).then(function(response) {
         var localStorageVals = JSON.parse(localStorage.getItem("city"))
         console.log(localStorageVals)
-        generateLocals();
+        
         //console.log(moment.parseZone(date).format('MMM Do YYYY'));
         icon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
         console.log(icon + " icon");
@@ -28,17 +29,28 @@ var icon = "http://openweathermap.org/img/wn/04d@2x.png";
     var lat = response.coord.lat;
     var lon = response.coord.lon;
     getUV(lat, lon);
+    generateLocals();
     });
 }
 
-
+//this function gets the UV value for the latitude and longitude of an area
 function getUV (lat, lon) {
     var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    $(".mainUV").text(response.value)
+    $(".mainUV").text(response.value);
+    var vall = response.value;
+    if (vall <= 5.0) {
+        $(".mainUV").css("background-color", "yellow"); 
+    } else if (vall <= 7.0) {
+        $(".mainUV").css("background-color", "orange"); 
+    } else if (vall <= 10.0) {
+        $(".mainUV").css("background-color", "red"); 
+    } else { //vall is greater than 10, meaning super bad UV 
+        $(".mainUV").css("background-color", "lavender"); 
+    }
   })
 }
 
@@ -46,6 +58,7 @@ getCityInfo();
 getForecast();
 
 
+//this function loads the five day forecast info and plugs in the values retrieved from the api, with corresponding Emoji.
 function getForecast() {
     // var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentCity +"&cnt=5&appid=" + APIKey;
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&cnt=38&appid=" + APIKey;
@@ -71,12 +84,11 @@ function getForecast() {
         }
         }
         generateLocals();
-        //$(".card-title").text(currentCity);
-        //$(".mainTemp").text = ((response.main.temp - 273.15) * 1.80 + 32).toFixed(1); main.temp
       })
 
 }
 
+    //this function populates the list of choices from localStorage below the search bar on the left
   function generateLocals() {
     var toLoad = JSON.parse(localStorage.getItem("city"));
     //need to empty rows first 
@@ -90,6 +102,7 @@ function getForecast() {
     }
   }
 
+    //tracks clicks on choice cards in the .box to get the value of the city, and set the current city displayed to this value, reruns main functions
   $(".box").on("click", ".choiceCard", function(event) {
         event.preventDefault();
       //console.log("clicked choice " + $(".choiceCard").text());
@@ -100,6 +113,7 @@ function getForecast() {
       generateLocals();
   })
     
+  // stores info to local storage, reruns the above functions to generate local values and display tiles
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
         currentCity =  $("#inlineFormInputName").val();
