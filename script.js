@@ -76,12 +76,16 @@ function getForecast() {
     
     jQuery(`[type = "Submit"]`).on("click", function() {
         event.preventDefault();
-        
+        var newDiv = $("<section>");
+        newDiv.addClass("card" + currentCity);
+        newDiv.text(currentCity);
+
         currentCity =  $("#inlineFormInputName").val();
         localStorage.setItem("city", JSON.stringify(currentCity));
         console.log("local storage: " + JSON.parse(localStorage.getItem("city")))
         cityStates.push(currentCity);
         console.log(currentCity);
+        $("#inlineFormInputName").val("");
         getCityInfo();
         getForecast();
     })
