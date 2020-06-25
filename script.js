@@ -1,10 +1,16 @@
 var cityStates = ["Seattle"];
 var APIKey = "1d43caedb3b0cdb286ed6a8762ac368d";
-var currentCity = "Seattle";
+var currentCity = "";
 var icon = "http://openweathermap.org/img/wn/04d@2x.png";
 
     //main function pulling information for the current city selected, pulling from local storage and populating info for temperature
     function getCityInfo() {
+        console.log(cityStates);
+        if (currentCity === "") {
+            currentCity = "Seattle";
+            cityStates =  JSON.parse(localStorage.getItem("city"))
+            console.log(cityStates);
+        }
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&cnt=5&appid=" + APIKey;
 
     
@@ -12,6 +18,7 @@ var icon = "http://openweathermap.org/img/wn/04d@2x.png";
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+        
         var localStorageVals = JSON.parse(localStorage.getItem("city"))
         console.log(localStorageVals)
         
@@ -29,7 +36,7 @@ var icon = "http://openweathermap.org/img/wn/04d@2x.png";
     var lat = response.coord.lat;
     var lon = response.coord.lon;
     getUV(lat, lon);
-    generateLocals();
+    
     });
 }
 
@@ -55,8 +62,8 @@ function getUV (lat, lon) {
 }
 
 getCityInfo();
-getForecast();
-
+getForecast(); //console.log(cityStates);
+generateLocals();
 
 //this function loads the five day forecast info and plugs in the values retrieved from the api, with corresponding Emoji.
 function getForecast() {
